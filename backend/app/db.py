@@ -15,7 +15,7 @@ from sqlalchemy.pool import StaticPool
 from sqlmodel import SQLModel
 from sqlmodel.ext.asyncio.session import AsyncSession
 
-_DEFAULT_ASYNC = "postgresql+asyncpg://parcel:parcel@localhost:5432/quickship"
+_DEFAULT_ASYNC = "sqlite+aiosqlite:///./quickship.db"
 
 
 def get_async_database_url() -> str:
