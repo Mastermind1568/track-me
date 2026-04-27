@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "../backend/index.py"
+    },
+    {
+      "source": "/merchant/:path*",
+      "destination": "../merchant-portal/:path*"
+    }
+  ]
+}
