@@ -1,0 +1,55 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Footer from '../components/Footer.astro';
+import Nav from '../components/Nav.astro';
+
+const reviews = [
+  { text: "First time a delivery actually arrived in the 15-minute window! I loved seeing exactly where the van was on the map.", author: "Sarah Jenkins", location: "New York, USA" },
+  { text: "The driver actually called me when he couldn't find my side door. Unheard of level of service.", author: "Marcus T.", location: "Sydney, AUS" },
+  { text: "I run a small D2C brand. Switching to Quickship Direct dropped our 'where is my order' tickets by 90%. My customers love the tracking page.", author: "Elena R., Founder", location: "London, UK" },
+  { text: "Clean tracking interface. Didn't have to squint at weird carrier codes. It just said 'It's here!' and it was.", author: "David Chen", location: "Berlin, GER" },
+  { text: "Their vans are electric and their drivers are nice. What more could you ask for?", author: "Jessie L.", location: "Toronto, CAN" },
+  { text: "Received my package at exactly 2:15 PM as promised. The yellow progress bar is weirdly satisfying to watch.", author: "Amanda G.", location: "Los Angeles, USA" }
+];
+---
+
+<Layout title="Customer Reviews | Quickship Direct">
+  <Nav />
+
+  <main class="pt-24 pb-32 bg-[#F7F5F0] min-h-screen">
+    <section class="container mx-auto px-6 max-w-6xl">
+      <div class="text-center mb-20">
+        <h1 class="text-5xl md:text-7xl font-black uppercase tracking-tighter mb-6">
+          Don't Just Take<br/>Our <span class="text-[#FFD600] bg-black px-4 inline-block transform -skew-x-6">Word</span> For It.
+        </h1>
+        <p class="text-xl text-gray-500 font-medium max-w-2xl mx-auto">
+          Millions of packages delivered on time. Here's what people are saying about the Quickship Direct experience.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {reviews.map((r, i) => (
+          <div class="bg-white border-4 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,0.1)] hover:shadow-none hover:translate-x-2 hover:translate-y-2 transition-all">
+            <div class="flex text-[#FFD600] text-xl mb-6">
+              ★★★★★
+            </div>
+            <p class="text-lg font-medium leading-relaxed mb-8">
+              "{r.text}"
+            </p>
+            <div class="border-t-2 border-gray-100 pt-4 flex justify-between items-end">
+              <div>
+                <div class="font-black uppercase tracking-tight">{r.author}</div>
+                <div class="text-xs font-bold text-gray-400 uppercase tracking-widest">{r.location}</div>
+              </div>
+              <div class="w-6 h-6 bg-black rounded-full flex items-center justify-center">
+                <span class="text-[#FFD600] text-[10px] font-black">Q</span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

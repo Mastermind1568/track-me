@@ -1,0 +1,3 @@
+[submodule "gtracker"]
+	path = gtracker
+	url = https://github.com/Mastermind1568/gtracker.git

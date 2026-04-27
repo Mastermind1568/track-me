@@ -1,0 +1,62 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: qs-postgres-prod
+    restart: always
+    environment:
+      POSTGRES_USER: parcel
+      POSTGRES_PASSWORD: parcel_production_secret
+      POSTGRES_DB: quickship
+    volumes:
+      - qs_pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U parcel -d quickship"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.production
+    container_name: qs-api-prod
+    restart: always
+    environment:
+      DATABASE_URL: postgresql+asyncpg://parcel:parcel_production_secret@postgres:5432/quickship
+      ADMIN_SECRET_KEY: ${ADMIN_SECRET_KEY:-change_me_in_production}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+
+  merchant:
+    build:
+      context: ./merchant-portal
+      dockerfile: Dockerfile.production
+      args:
+        NEXT_PUBLIC_API_BASE: http://localhost:8000
+    container_name: qs-merchant-prod
+    restart: always
+    depends_on:
+      - backend
+    ports:
+      - "3000:3000"
+
+  tracking:
+    build:
+      context: ./tracking-frontend
+      dockerfile: Dockerfile.production
+      args:
+        PUBLIC_API_BASE: http://localhost:8000
+    container_name: qs-tracking-prod
+    restart: always
+    depends_on:
+      - backend
+    ports:
+      - "4321:4321"
+
+volumes:
+  qs_pg_data:

@@ -1,0 +1,430 @@
+---
+import Layout from '../layouts/Layout.astro';
+import TrackingForm from '../components/TrackingForm.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Quickship Direct | Your Delivery, Our Promise">
+  <!-- Navigation -->
+  <nav class="fixed top-0 w-full z-50 glass-card px-6 py-4 flex justify-between items-center animate-fade-in">
+    <div class="flex items-center gap-2">
+      <img src="/images/logo.png" alt="Quickship Direct Logo" class="w-10 h-10 object-contain" />
+      <span class="text-xl font-black uppercase tracking-tighter">Quickship <span class="font-light opacity-50">Direct</span></span>
+    </div>
+    <div class="hidden md:flex gap-8 text-xs font-bold uppercase tracking-widest items-center text-black">
+      <a href="/about" class="hover:opacity-50 transition-opacity">About</a>
+      <a href="/reviews" class="hover:opacity-50 transition-opacity">Reviews</a>
+      <a href="/contact" class="hover:opacity-50 transition-opacity">Contact</a>
+      <a href="#services" class="hover:opacity-50 transition-opacity">Services</a>
+      <a href="/merchant" class="bg-[#FFD600] border-2 border-black text-black px-5 py-2 hover:bg-black hover:text-[#FFD600] transition-all font-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1">Merchant Log In</a>
+    </div>
+    <!-- Mobile hamburger -->
+    <button id="mobile-menu-btn" class="md:hidden flex flex-col gap-1.5 p-2" aria-label="Open menu">
+      <span class="block w-6 h-0.5 bg-black"></span>
+      <span class="block w-6 h-0.5 bg-black"></span>
+      <span class="block w-4 h-0.5 bg-black"></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Menu Overlay -->
+  <div id="mobile-menu" class="fixed inset-0 z-[100] bg-black text-white flex-col items-center justify-center gap-8 hidden">
+    <button id="mobile-menu-close" class="absolute top-6 right-6 text-3xl font-black text-[#FFD600]" aria-label="Close menu">&times;</button>
+    <a href="/" class="text-2xl font-black uppercase tracking-tighter hover:text-[#FFD600] transition-colors">Home</a>
+    <a href="/about" class="text-2xl font-black uppercase tracking-tighter hover:text-[#FFD600] transition-colors">About</a>
+    <a href="/reviews" class="text-2xl font-black uppercase tracking-tighter hover:text-[#FFD600] transition-colors">Reviews</a>
+    <a href="/contact" class="text-2xl font-black uppercase tracking-tighter hover:text-[#FFD600] transition-colors">Contact</a>
+    <a href="/merchant" class="bg-[#FFD600] text-black px-8 py-4 font-black uppercase tracking-widest text-sm mt-4">Merchant Log In</a>
+  </div>
+
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', function() {
+      var btn = document.getElementById('mobile-menu-btn');
+      var menu = document.getElementById('mobile-menu');
+      var close = document.getElementById('mobile-menu-close');
+      if (btn && menu) {
+        btn.addEventListener('click', function() { menu.classList.remove('hidden'); menu.classList.add('flex'); });
+      }
+      if (close && menu) {
+        close.addEventListener('click', function() { menu.classList.add('hidden'); menu.classList.remove('flex'); });
+      }
+    });
+  </script>
+
+  <!-- Hero Section (D2C Focus) -->
+  <section id="hero" class="relative min-h-[90vh] flex flex-col md:flex-row pt-20 overflow-hidden">
+    <!-- Left: Yellow Text Area -->
+    <div class="w-full md:w-1/2 bg-[#FFD600] flex items-center justify-center p-8 md:p-16 relative z-10 border-b-4 md:border-b-0 md:border-r-4 border-black">
+      <div class="max-w-xl w-full">
+        <div class="animate-fade-in-up text-black">
+          <h2 class="text-sm font-bold uppercase tracking-[0.4em] opacity-70 mb-6">Premium Last-Mile Delivery</h2>
+          <h1 class="text-6xl md:text-8xl font-black uppercase tracking-tighter leading-[0.9] mb-8">
+            Where's<br/>My<br/>Package?
+          </h1>
+          <p class="text-xl font-medium mb-12 opacity-80">Track your delivery in real time. Know exactly when it arrives.</p>
+        </div>
+
+        <div class="animate-fade-in-up animation-delay-200">
+          <div class="bg-white p-1 md:p-2 border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+            <TrackingForm />
+          </div>
+          <p class="text-black/60 text-[10px] font-bold uppercase tracking-widest mt-4">
+            Track your parcel in real-time with Google Maps™ Live Trajectory
+          </p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Right: Image Area -->
+    <div class="w-full md:w-1/2 relative min-h-[50vh] md:min-h-full">
+      <div class="absolute inset-0 z-0">
+        <img 
+          src="/images/delivery_doorstep_hero.png" 
+          alt="Happy customer receiving package at door" 
+          class="w-full h-full object-cover animate-fade-in transition-transform duration-[10s] hover:scale-105"
+        />
+        <div class="absolute inset-0 bg-black/10"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Scrolling Marquee Ticker (Dragonfly-inspired) -->
+  <section class="bg-[#FFD600] py-4 overflow-hidden border-b-4 border-black">
+    <div class="marquee-container">
+      <div class="marquee-content">
+        <span class="marquee-item">Real-Time Tracking</span>
+        <span class="marquee-dot">✦</span>
+        <span class="marquee-item">Last-Mile Delivery</span>
+        <span class="marquee-dot">✦</span>
+        <span class="marquee-item">Every Promise Kept</span>
+        <span class="marquee-dot">✦</span>
+        <span class="marquee-item">Zero-Emission Fleet</span>
+        <span class="marquee-dot">✦</span>
+        <span class="marquee-item">15-Min ETA Precision</span>
+        <span class="marquee-dot">✦</span>
+        <span class="marquee-item">Photo Proof of Delivery</span>
+        <span class="marquee-dot">✦</span>
+        <!-- Duplicate for seamless loop -->
+        <span class="marquee-item">Real-Time Tracking</span>
+        <span class="marquee-dot">✦</span>
+        <span class="marquee-item">Last-Mile Delivery</span>
+        <span class="marquee-dot">✦</span>
+        <span class="marquee-item">Every Promise Kept</span>
+        <span class="marquee-dot">✦</span>
+        <span class="marquee-item">Zero-Emission Fleet</span>
+        <span class="marquee-dot">✦</span>
+        <span class="marquee-item">15-Min ETA Precision</span>
+        <span class="marquee-dot">✦</span>
+        <span class="marquee-item">Photo Proof of Delivery</span>
+        <span class="marquee-dot">✦</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="py-32 bg-[#F7F5F0]">
+    <div class="container mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div class="reveal p-8 border-l-4 border-[#FFD600] bg-white hover-lift shadow-sm">
+          <div class="text-xs font-black uppercase tracking-widest text-gray-400 mb-4">Service 01</div>
+          <h3 class="text-2xl font-black uppercase tracking-tight mb-4 text-black">Right to your door</h3>
+          <p class="text-gray-600 leading-relaxed font-medium">We'll text you when we're 15 minutes away. Safe, secure deliveries with photo proof.</p>
+        </div>
+        <div class="reveal p-8 border-l-4 border-[#FFD600] bg-white hover-lift shadow-sm animation-delay-100">
+          <div class="text-xs font-black uppercase tracking-widest text-gray-400 mb-4">Service 02</div>
+          <h3 class="text-2xl font-black uppercase tracking-tight mb-4 text-black">Watch it move</h3>
+          <p class="text-gray-600 leading-relaxed font-medium">See your package traveling to you on a live map. Our system predicts ETA within a 15-minute window.</p>
+        </div>
+        <div class="reveal p-8 border-l-4 border-[#FFD600] bg-white hover-lift shadow-sm animation-delay-200">
+          <div class="text-xs font-black uppercase tracking-widest text-gray-400 mb-4">Service 03</div>
+          <h3 class="text-2xl font-black uppercase tracking-tight mb-4 text-black">Not home? No problem.</h3>
+          <p class="text-gray-600 leading-relaxed font-medium">Reschedule, redirect, or leave instructions for the driver instantly from your phone.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Video Section -->
+  <section class="bg-black text-white py-32 relative border-b-8 border-[#FFD600]">
+    <div class="container mx-auto px-6 max-w-6xl text-center">
+      <h2 class="text-xs font-black uppercase tracking-[0.3em] text-[#FFD600] mb-4">Inside the Hub</h2>
+      <h3 class="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-12">The Shipping Process.</h3>
+      
+      <div id="play-btn" class="relative group cursor-pointer border-4 border-white inline-block w-full max-w-4xl hover:border-[#FFD600] transition-colors">
+        <!-- Thumbnail -->
+        <div class="relative aspect-video bg-gray-900 overflow-hidden">
+          <img src="/images/shipping_process_video.png" alt="Warehouse operations" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-80 group-hover:opacity-100" />
+          <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
+        </div>
+        
+        <!-- Play Button -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 bg-[#FFD600] text-black rounded-full flex items-center justify-center font-black text-3xl shadow-[0_0_0_0_rgba(255,214,0,0.5)] group-hover:animate-pulse">
+          ▶
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Video Modal -->
+  <div id="video-modal" class="fixed inset-0 z-[100] bg-black/95 hidden items-center justify-center backdrop-blur-sm animate-fade-in">
+    <button id="close-modal-btn" class="absolute top-8 right-8 text-white hover:text-[#FFD600] transition-colors">
+      <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+    </button>
+    <div class="w-full max-w-5xl px-6">
+      <div class="aspect-video bg-gray-900 border-4 border-[#FFD600] relative overflow-hidden flex items-center justify-center shadow-[0_0_50px_rgba(255,214,0,0.3)]">
+        <!-- Real Video Player -->
+        <video id="demo-video" controls class="w-full h-full object-cover">
+          <source src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const playBtn = document.getElementById('play-btn');
+    const closeBtn = document.getElementById('close-modal-btn');
+    const modal = document.getElementById('video-modal');
+    const video = document.getElementById('demo-video') as HTMLVideoElement;
+
+    playBtn?.addEventListener('click', () => {
+      modal?.classList.remove('hidden');
+      modal?.classList.add('flex');
+      video?.play().catch(e => console.error("Playback failed:", e));
+    });
+
+    closeBtn?.addEventListener('click', () => {
+      modal?.classList.add('hidden');
+      modal?.classList.remove('flex');
+      video?.pause();
+    });
+  </script>
+
+  <!-- Dedicated Fleet / Worker Section -->
+  <section class="py-32 bg-white relative overflow-hidden">
+    <div class="container mx-auto px-6 max-w-6xl relative z-10">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+        <div class="relative h-[600px] border-8 border-black shadow-[16px_16px_0px_0px_#FFD600]">
+           <img src="/images/worker_van.png" alt="Quickship Driver and Van" class="absolute inset-0 w-full h-full object-cover" />
+        </div>
+        <div>
+          <h2 class="text-xs font-black uppercase tracking-[0.3em] text-gray-400 mb-4">Dedicated Professionals</h2>
+          <h3 class="text-5xl font-black uppercase tracking-tighter mb-8 leading-none">Your package in <span class="text-[#FFD600]">good hands.</span></h3>
+          <div class="space-y-6 text-lg text-gray-600 font-medium">
+            <p>
+              Unlike traditional carriers that rely on anonymous contractors, Quickship Direct employs a fully dedicated fleet of logistics professionals. 
+            </p>
+            <p>
+              When you see our signature yellow van and uniform, you know your delivery is being handled by someone who cares about your unboxing experience as much as you do.
+            </p>
+          </div>
+          <a href="/about" class="mt-8 inline-block border-b-4 border-black font-black uppercase tracking-widest hover:text-[#FFD600] hover:border-[#FFD600] transition-colors pb-1">Read our story →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Impact / Stats Section with Count-Up -->
+  <section id="about" class="py-32 bg-black text-white overflow-hidden relative">
+    <div class="absolute right-0 top-0 w-full md:w-1/2 h-full opacity-40">
+       <img src="/images/delivery_van_aerial.png" alt="Delivery van aerial view" class="w-full h-full object-cover" />
+       <div class="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent"></div>
+    </div>
+    <div class="container mx-auto px-6 relative z-10">
+      <div class="max-w-2xl reveal">
+        <h2 class="text-5xl md:text-7xl font-black uppercase tracking-tighter mb-8 leading-none">
+          Trusted by<br/>millions.
+        </h2>
+        <p class="text-xl text-gray-300 mb-12 font-medium max-w-lg">
+          Join 5.2 million people who track with Quickship. We operate a specialized network covering 98% of urban centers with zero-emission delivery.
+        </p>
+        <div class="flex flex-wrap gap-16">
+          <div>
+            <div class="text-4xl font-black count-up text-[#FFD600]" data-target="5.2" data-suffix="M">0</div>
+            <div class="text-[10px] font-bold uppercase tracking-widest text-gray-400">Happy Deliveries</div>
+          </div>
+          <div>
+            <div class="text-4xl font-black count-up text-[#FFD600]" data-target="15" data-suffix="min">0</div>
+            <div class="text-[10px] font-bold uppercase tracking-widest text-gray-400">ETA Precision</div>
+          </div>
+          <div>
+            <div class="text-4xl font-black count-up text-[#FFD600]" data-target="98" data-suffix="%">0</div>
+            <div class="text-[10px] font-bold uppercase tracking-widest text-gray-400">Urban Coverage</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews Preview Section -->
+  <section class="py-32 bg-[#F7F5F0]">
+    <div class="container mx-auto px-6 max-w-6xl">
+      <div class="flex justify-between items-end mb-12">
+        <div>
+          <h2 class="text-xs font-black uppercase tracking-[0.3em] text-gray-400 mb-2">Real Feedback</h2>
+          <h3 class="text-4xl md:text-5xl font-black uppercase tracking-tighter">What People Say</h3>
+        </div>
+        <a href="/reviews" class="hidden md:inline-block border-2 border-black px-6 py-3 font-black uppercase text-[10px] tracking-widest hover:bg-black hover:text-white transition-colors">
+          Read All Reviews
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-white border-4 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,0.1)] hover:shadow-none hover:translate-x-2 hover:translate-y-2 transition-all">
+          <div class="text-[#FFD600] text-xl mb-4">★★★★★</div>
+          <p class="text-gray-800 font-medium leading-relaxed mb-6">"First time a delivery actually arrived in the 15-minute window! I loved seeing exactly where the van was on the map."</p>
+          <div class="border-t-2 border-gray-100 pt-4 flex justify-between items-end">
+            <div>
+              <div class="font-black uppercase text-sm">Sarah Jenkins</div>
+              <div class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">New York, USA</div>
+            </div>
+            <div class="w-6 h-6 bg-black rounded-full flex items-center justify-center">
+              <span class="text-[#FFD600] text-[10px] font-black">Q</span>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white border-4 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,0.1)] hover:shadow-none hover:translate-x-2 hover:translate-y-2 transition-all">
+          <div class="text-[#FFD600] text-xl mb-4">★★★★★</div>
+          <p class="text-gray-800 font-medium leading-relaxed mb-6">"Clean tracking interface. Didn't have to squint at weird carrier codes. It just said 'It's here!' and it was."</p>
+          <div class="border-t-2 border-gray-100 pt-4 flex justify-between items-end">
+            <div>
+              <div class="font-black uppercase text-sm">David Chen</div>
+              <div class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Sydney, AUS</div>
+            </div>
+            <div class="w-6 h-6 bg-black rounded-full flex items-center justify-center">
+              <span class="text-[#FFD600] text-[10px] font-black">Q</span>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white border-4 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,0.1)] hover:shadow-none hover:translate-x-2 hover:translate-y-2 transition-all">
+          <div class="text-[#FFD600] text-xl mb-4">★★★★★</div>
+          <p class="text-gray-800 font-medium leading-relaxed mb-6">"I run a small D2C brand. Switching to Quickship Direct dropped our 'where is my order' tickets by 90%."</p>
+          <div class="border-t-2 border-gray-100 pt-4 flex justify-between items-end">
+            <div>
+              <div class="font-black uppercase text-sm text-black">Elena R.</div>
+              <div class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">London, UK</div>
+            </div>
+            <div class="w-6 h-6 bg-black rounded-full flex items-center justify-center">
+              <span class="text-[#FFD600] text-[10px] font-black">Q</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="mt-8 text-center md:hidden">
+        <a href="/reviews" class="inline-block border-2 border-black px-6 py-3 font-black uppercase text-[10px] tracking-widest">
+          Read All Reviews
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-32 bg-[#FFD600] text-center border-y-4 border-black relative overflow-hidden">
+    <div class="absolute inset-0 opacity-20 mix-blend-multiply">
+      <img src="/images/happy_unboxing.png" class="w-full h-full object-cover" />
+    </div>
+    <div class="container mx-auto px-6 reveal relative z-10">
+      <h2 class="text-4xl md:text-5xl font-black uppercase tracking-tighter mb-12 text-black">Know where your package is. Always.</h2>
+      <a href="#hero" class="inline-block bg-black text-[#FFD600] px-12 py-5 font-black uppercase tracking-widest hover:bg-gray-900 transition-all shadow-[8px_8px_0px_0px_rgba(0,0,0,0.1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1">
+        Track My Package
+      </a>
+    </div>
+  </section>
+
+  <Footer />
+
+  <script>
+    // Intersection Observer for reveals
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    
+    window.addEventListener('load', () => {
+      document.querySelectorAll('.reveal').forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight) el.classList.add('visible');
+      });
+    });
+
+    // Count-up animation
+    const countObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target as HTMLElement;
+          const target = parseFloat(el.dataset.target || '0');
+          const suffix = el.dataset.suffix || '';
+          const duration = 2000;
+          const startTime = performance.now();
+          const isDecimal = target % 1 !== 0;
+
+          function animate(currentTime: number) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            // Ease out cubic
+            const eased = 1 - Math.pow(1 - progress, 3);
+            const current = target * eased;
+            
+            el.textContent = (isDecimal ? current.toFixed(1) : Math.round(current).toString()) + suffix;
+            
+            if (progress < 1) {
+              requestAnimationFrame(animate);
+            }
+          }
+
+          requestAnimationFrame(animate);
+          countObserver.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('.count-up').forEach(el => countObserver.observe(el));
+  </script>
+</Layout>
+
+<style>
+  /* Marquee Animation */
+  .marquee-container {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .marquee-content {
+    display: flex;
+    animation: marquee 30s linear infinite;
+    white-space: nowrap;
+    gap: 0;
+  }
+
+  .marquee-item {
+    color: black;
+    font-size: 11px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    padding: 0 1.5rem;
+    flex-shrink: 0;
+  }
+
+  .marquee-dot {
+    color: rgba(0, 0, 0, 0.3);
+    font-size: 11px;
+    padding: 0 0.5rem;
+    flex-shrink: 0;
+  }
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+</style>

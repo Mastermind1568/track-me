@@ -1,0 +1,37 @@
+# Dependencies
+node_modules/
+.packages/
+
+# Build outputs
+dist/
+.next/
+.vercel/
+.astro/
+
+# Environment & Secrets
+.env
+.env.local
+.env.production
+.env*.local
+
+# Database
+*.db
+*.sqlite
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+
+# Storage uploads
+backend/storage/*
+!backend/storage/.gitkeep
+
+# IDE
+.vscode/
+.idea/

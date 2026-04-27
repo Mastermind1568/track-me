@@ -1,0 +1,43 @@
+<!-- Shared navigation bar with mobile hamburger menu -->
+<nav class="flex items-center justify-between px-6 py-6 border-b border-gray-100">
+  <a href="/" class="flex items-center gap-2">
+    <img src="/images/logo.png" alt="Quickship Direct Logo" class="w-10 h-10 object-contain" />
+    <span class="text-xl font-black uppercase tracking-tighter">Quickship <span class="font-light opacity-50">Direct</span></span>
+  </a>
+  <div class="hidden md:flex gap-8 text-xs font-bold uppercase tracking-widest items-center text-black">
+    <a href="/about" class="hover:opacity-50 transition-opacity">About</a>
+    <a href="/reviews" class="hover:opacity-50 transition-opacity">Reviews</a>
+    <a href="/contact" class="hover:opacity-50 transition-opacity">Contact</a>
+    <a href="/merchant" class="bg-[#FFD600] border-2 border-black text-black px-5 py-2 hover:bg-black hover:text-[#FFD600] transition-all font-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1">Merchant Log In</a>
+  </div>
+  <!-- Mobile hamburger -->
+  <button id="mobile-menu-btn" class="md:hidden flex flex-col gap-1.5 p-2" aria-label="Open menu">
+    <span class="block w-6 h-0.5 bg-black"></span>
+    <span class="block w-6 h-0.5 bg-black"></span>
+    <span class="block w-4 h-0.5 bg-black"></span>
+  </button>
+</nav>
+
+<!-- Mobile Menu Overlay -->
+<div id="mobile-menu" class="fixed inset-0 z-[100] bg-black text-white flex-col items-center justify-center gap-8 hidden">
+  <button id="mobile-menu-close" class="absolute top-6 right-6 text-3xl font-black text-[#FFD600]" aria-label="Close menu">&times;</button>
+  <a href="/" class="text-2xl font-black uppercase tracking-tighter hover:text-[#FFD600] transition-colors">Home</a>
+  <a href="/about" class="text-2xl font-black uppercase tracking-tighter hover:text-[#FFD600] transition-colors">About</a>
+  <a href="/reviews" class="text-2xl font-black uppercase tracking-tighter hover:text-[#FFD600] transition-colors">Reviews</a>
+  <a href="/contact" class="text-2xl font-black uppercase tracking-tighter hover:text-[#FFD600] transition-colors">Contact</a>
+  <a href="/merchant" class="bg-[#FFD600] text-black px-8 py-4 font-black uppercase tracking-widest text-sm mt-4">Merchant Log In</a>
+</div>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', function() {
+    var btn = document.getElementById('mobile-menu-btn');
+    var menu = document.getElementById('mobile-menu');
+    var close = document.getElementById('mobile-menu-close');
+    if (btn && menu) {
+      btn.addEventListener('click', function() { menu.classList.remove('hidden'); menu.classList.add('flex'); });
+    }
+    if (close && menu) {
+      close.addEventListener('click', function() { menu.classList.add('hidden'); menu.classList.remove('flex'); });
+    }
+  });
+</script>

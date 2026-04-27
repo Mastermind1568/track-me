@@ -1,0 +1,66 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Footer from '../components/Footer.astro';
+import Nav from '../components/Nav.astro';
+---
+
+<Layout title="Contact Us | Quickship Direct">
+  <Nav />
+
+  <main class="pt-24 pb-32">
+    <section class="container mx-auto px-6 max-w-5xl">
+      <h1 class="text-6xl md:text-8xl font-black uppercase tracking-tighter leading-none mb-6">
+        Let's <span class="text-[#FFD600]">Talk.</span>
+      </h1>
+      <p class="text-xl text-gray-500 font-medium max-w-2xl mb-16">
+        Whether you're a consumer wondering about a package or a merchant looking to upgrade your logistics, we're here.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <!-- Sales Inquiries -->
+        <div class="bg-black text-white p-12 relative overflow-hidden group">
+          <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-[#FFD600] rounded-full opacity-0 group-hover:opacity-20 transition-opacity duration-700 blur-2xl"></div>
+          <h2 class="text-3xl font-black uppercase tracking-tighter mb-4">Merchant Sales</h2>
+          <p class="text-gray-400 font-medium mb-8 leading-relaxed">
+            Ready to give your customers the delivery experience they deserve? Our API integrates in minutes.
+          </p>
+          <a href="mailto:support@quickshipdirect.co" class="inline-block bg-[#FFD600] text-black px-8 py-4 font-black uppercase tracking-widest text-sm hover:bg-white transition-colors">
+            Contact Sales
+          </a>
+        </div>
+
+        <!-- Support -->
+        <div class="border-4 border-black p-12 relative">
+          <h2 class="text-3xl font-black uppercase tracking-tighter mb-4">Package Support</h2>
+          <p class="text-gray-600 font-medium mb-8 leading-relaxed">
+            Missing a package? Driver couldn't find your house? Enter your tracking number below to open a ticket.
+          </p>
+          <form action="mailto:support@quickshipdirect.co" method="POST" enctype="text/plain" class="flex flex-col gap-4">
+            <input type="text" name="tracking" placeholder="Tracking Number (e.g. QS...)" class="border-2 border-black p-4 font-bold outline-none focus:border-[#FFD600]" />
+            <textarea name="message" placeholder="How can we help?" rows="3" class="border-2 border-black p-4 font-bold outline-none focus:border-[#FFD600]"></textarea>
+            <button type="submit" class="bg-black text-white px-8 py-4 font-black uppercase tracking-widest text-sm hover:bg-[#FFD600] hover:text-black transition-colors">
+              Submit Ticket
+            </button>
+          </form>
+        </div>
+      </div>
+      
+      <!-- FAQ Snippet -->
+      <div id="faq" class="mt-24 pt-16 border-t border-gray-100">
+        <h2 class="text-3xl font-black uppercase tracking-tighter mb-8 text-center">Frequently Asked Questions</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <div>
+            <h3 class="font-black uppercase tracking-tight mb-2">How accurate is the tracking?</h3>
+            <p class="text-gray-500 text-sm">Our vans are equipped with real-time GPS updating every 10 seconds. You see what our dispatch sees.</p>
+          </div>
+          <div>
+            <h3 class="font-black uppercase tracking-tight mb-2">Can I change my delivery address?</h3>
+            <p class="text-gray-500 text-sm">If your package is not yet "Out for Delivery", you can request an address change via the tracking portal.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

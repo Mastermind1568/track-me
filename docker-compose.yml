@@ -1,0 +1,47 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: quickship-postgres
+    environment:
+      POSTGRES_USER: parcel
+      POSTGRES_PASSWORD: parcel
+      POSTGRES_DB: quickship
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U parcel -d quickship"]
+      interval: 3s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build: ./backend
+    container_name: quickship-api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+      - ./backend/storage:/app/storage
+    environment:
+      DATABASE_URL: postgresql+asyncpg://parcel:parcel@postgres:5432/quickship
+      DEMO_API_KEY: demo-merchant-key
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  web:
+    build: ./merchant-portal
+    container_name: quickship-web
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./merchant-portal:/app
+    environment:
+      NEXT_PUBLIC_API_BASE: http://localhost:8000
+
+volumes:
+  pgdata:

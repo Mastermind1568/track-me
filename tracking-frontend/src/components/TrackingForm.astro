@@ -1,0 +1,40 @@
+---
+// TrackingForm.astro
+---
+
+<div class="w-full">
+  <form id="tracking-form" class="flex flex-col sm:flex-row gap-0">
+    <input 
+      type="text" 
+      id="tracking-id"
+      required
+      placeholder="ENTER WAYBILL NUMBER" 
+      class="flex-1 bg-white px-6 py-5 text-lg font-black outline-none transition-all placeholder:text-gray-300 placeholder:font-bold uppercase tracking-widest"
+    />
+    <button 
+      type="submit"
+      class="bg-black text-white px-10 py-5 text-lg font-black uppercase tracking-[0.2em] hover:bg-gray-800 transition-colors active:scale-95"
+    >
+      TRACK
+    </button>
+  </form>
+  <div id="error-message" class="hidden text-red-600 font-bold mt-4 px-6 pb-4 bg-white text-xs uppercase tracking-widest">
+    Waybill not found. Please check and try again.
+  </div>
+</div>
+
+<script>
+  const form = document.getElementById('tracking-form');
+  const input = document.getElementById('tracking-id') as HTMLInputElement;
+  const errorMsg = document.getElementById('error-message');
+
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const id = input?.value.trim();
+    if (id) {
+      window.location.href = `/track/${id}`;
+    } else {
+      errorMsg?.classList.remove('hidden');
+    }
+  });
+</script>
