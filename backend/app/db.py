@@ -58,7 +58,13 @@ def _create_async_engine():
                 poolclass=StaticPool,
             )
         return create_async_engine(url, echo=echo, connect_args={"check_same_thread": False})
-    return create_async_engine(url, echo=echo, pool_pre_ping=True)
+    
+    # Add SSL for Postgres
+    connect_args = {}
+    if "postgresql" in url or "postgres" in url:
+        connect_args["ssl"] = "require"
+        
+    return create_async_engine(url, echo=echo, pool_pre_ping=True, connect_args=connect_args)
 
 
 engine = _create_async_engine()
