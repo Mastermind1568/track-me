@@ -1,20 +1,11 @@
-"""Vercel Serverless Function entry point."""
-import traceback
+from fastapi import FastAPI
 
-try:
-    from app.main import app
-except Exception as e:
-    # If the app fails to import, create a minimal FastAPI that reports the error
-    from fastapi import FastAPI
-    from fastapi.responses import JSONResponse
+app = FastAPI()
 
-    app = FastAPI()
+@app.get("/")
+async def root():
+    return {"status": "ok", "message": "Vercel Hello World"}
 
-    error_msg = f"{type(e).__name__}: {e}\n{traceback.format_exc()}"
-
-    @app.get("/{path:path}")
-    async def error_handler(path: str = ""):
-        return JSONResponse(
-            status_code=500,
-            content={"error": "App failed to start", "detail": error_msg}
-        )
+@app.get("/api")
+async def api_root():
+    return {"status": "ok", "message": "API is working"}
