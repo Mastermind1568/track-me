@@ -26,25 +26,32 @@ def _get_raw_url() -> str:
 
 def _normalize_async(url: str) -> str:
     """Normalize any database URL to use the correct async driver."""
+    # Strip any query parameters like ?sslmode=require which crash asyncpg
+    if "?" in url:
+        url = url.split("?", 1)[0]
+
     # SQLite
     if url.startswith("sqlite://") and "+aiosqlite" not in url:
         return url.replace("sqlite://", "sqlite+aiosqlite://", 1)
-    # Already has asyncpg
-    if "+asyncpg" in url:
-        return url
-    # psycopg -> asyncpg
+    
+    # Normalize postgres/postgresql
+    if url.startswith("postgres://"):
+        url = url.replace("postgres://", "postgresql://", 1)
+
+    # Ensure asyncpg driver is specified
+    if url.startswith("postgresql://"):
+        return url.replace("postgresql://", "postgresql+asyncpg://", 1)
+    
     if "+psycopg" in url:
         return url.replace("+psycopg", "+asyncpg")
-    # postgres:// or postgresql:// (bare, no driver specified)
-    if url.startswith("postgres://") or url.startswith("postgresql://"):
-        # Normalize to postgresql+asyncpg://
-        url = url.replace("postgres://", "postgresql://", 1) if url.startswith("postgres://") else url
-        return url.replace("postgresql://", "postgresql+asyncpg://", 1)
+        
     return url
 
 
 def _normalize_sync(url: str) -> str:
     """Normalize any database URL to use the correct sync driver."""
+    # For sync drivers (psycopg), we usually KEEP the query parameters (sslmode=require is good for sync)
+    
     if "+asyncpg" in url:
         return url.replace("+asyncpg", "+psycopg")
     if "+aiosqlite" in url:
