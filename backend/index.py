@@ -1,29 +1,37 @@
 import os
 import sys
-import traceback
-from fastapi import FastAPI
-from fastapi.responses import JSONResponse
 
-# Add the current directory to path
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-
-app = FastAPI()
+# CRITICAL: Tell Python where to find the 'app' folder
+# Vercel runs from a temporary directory, so we must use absolute paths.
+pwd = os.path.dirname(os.path.abspath(__file__))
+if pwd not in sys.path:
+    sys.path.insert(0, pwd)
 
 try:
-    # Try to import the real application
     from app.main import app as real_app
     app = real_app
-except Exception as e:
-    # If it fails, report why
-    error_info = traceback.format_exc()
+except ImportError as e:
+    from fastapi import FastAPI
+    app = FastAPI()
     
-    @app.get("/{path:path}")
-    async def catch_all(path: str = ""):
-        return JSONResponse(
-            status_code=500,
-            content={
-                "error": "Application Crash",
-                "message": str(e),
-                "traceback": error_info
-            }
-        )
+    @app.get("/")
+    async def error():
+        return {
+            "error": "Module Discovery Error",
+            "message": str(e),
+            "sys_path": sys.path,
+            "pwd": pwd,
+            "contents": os.listdir(pwd)
+        }
+except Exception as e:
+    from fastapi import FastAPI
+    app = FastAPI()
+    
+    @app.get("/")
+    async def error():
+        import traceback
+        return {
+            "error": "General Startup Error",
+            "message": str(e),
+            "traceback": traceback.format_exc()
+        }
