@@ -19,19 +19,20 @@ _DEFAULT_ASYNC = "sqlite+aiosqlite:///./quickship.db"
 
 
 def get_async_database_url() -> str:
-    url = os.getenv("DATABASE_URL", _DEFAULT_ASYNC)
+    # Check for Vercel's default env var first, then our custom one
+    url = os.getenv("POSTGRES_URL") or os.getenv("DATABASE_URL") or _DEFAULT_ASYNC
     if url.startswith("sqlite://") and "+aiosqlite" not in url:
         return url.replace("sqlite://", "sqlite+aiosqlite://", 1)
     if url.startswith("postgresql+psycopg://"):
         return url.replace("postgresql+psycopg://", "postgresql+asyncpg://", 1)
-    if url.startswith("postgresql://") and "+asyncpg" not in url and "+psycopg" not in url:
-        return url.replace("postgresql://", "postgresql+asyncpg://", 1)
+    if (url.startswith("postgresql://") or url.startswith("postgres://")) and "+asyncpg" not in url and "+psycopg" not in url:
+        return url.replace("://", "+asyncpg://", 1).replace("postgres+", "postgresql+", 1)
     return url
 
 
 def get_migration_url() -> str:
     """Sync URL for Alembic (psycopg or sqlite)."""
-    url = os.getenv("DATABASE_URL", _DEFAULT_ASYNC)
+    url = os.getenv("POSTGRES_URL") or os.getenv("DATABASE_URL") or _DEFAULT_ASYNC
     if "+asyncpg" in url:
         return url.replace("+asyncpg", "+psycopg")
     if "+aiosqlite" in url:
