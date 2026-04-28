@@ -11,11 +11,8 @@ from .db import create_db_and_tables
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    try:
-        await create_db_and_tables()
-    except Exception as e:
-        import logging
-        logging.warning(f"Database init skipped: {e}")
+    # We no longer create tables on startup to avoid Vercel timeouts.
+    # The database should be initialized once via a migration or seed script.
     yield
 
 
@@ -37,9 +34,19 @@ async def root():
     return {
         "status": "online",
         "service": "Quickship API",
-        "version": "1.0.0",
-        "docs": "/docs"
+        "version": "1.1.0",
+        "docs": "/docs",
+        "setup": "/init-db"
     }
+
+@app.get("/init-db")
+async def init_db():
+    try:
+        from .db import create_db_and_tables
+        await create_db_and_tables()
+        return {"status": "success", "message": "Database tables created successfully"}
+    except Exception as e:
+        return {"status": "error", "message": str(e)}
 
 # Storage: use /tmp on serverless (read-only filesystem), local dir otherwise
 if os.getenv("VERCEL"):
