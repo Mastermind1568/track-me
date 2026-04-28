@@ -80,15 +80,16 @@ def _create_async_engine():
             )
         return create_async_engine(url, echo=echo, connect_args={"check_same_thread": False})
 
-    # Postgres — asyncpg uses an ssl.SSLContext, NOT connect_args
+    # Postgres — asyncpg uses an ssl.SSLContext
     kwargs = {"echo": echo, "pool_pre_ping": True}
 
-    # If connecting to a cloud Postgres, enable SSL
-    if os.getenv("POSTGRES_URL") or os.getenv("VERCEL"):
-        ssl_ctx = ssl.create_default_context()
-        ssl_ctx.check_hostname = False
-        ssl_ctx.verify_mode = ssl.CERT_NONE
-        kwargs["connect_args"] = {"ssl": ssl_ctx}
+    if "postgresql" in url or "postgres" in url:
+        # For Vercel/Cloud Postgres, ensure SSL is enabled correctly
+        if os.getenv("VERCEL") or "vercel-storage.com" in url:
+            ssl_ctx = ssl.create_default_context()
+            ssl_ctx.check_hostname = False
+            ssl_ctx.verify_mode = ssl.CERT_NONE
+            kwargs["connect_args"] = {"ssl": ssl_ctx}
 
     return create_async_engine(url, **kwargs)
 
