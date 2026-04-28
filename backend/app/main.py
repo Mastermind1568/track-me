@@ -11,7 +11,11 @@ from .db import create_db_and_tables
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    await create_db_and_tables()
+    try:
+        await create_db_and_tables()
+    except Exception as e:
+        import logging
+        logging.warning(f"Database init skipped: {e}")
     yield
 
 
@@ -28,9 +32,14 @@ app.add_middleware(
 )
 app.include_router(router)
 
-ROOT = os.path.join(os.path.dirname(__file__), "..")
-STORAGE = os.path.join(ROOT, "storage")
-if not os.path.exists(STORAGE):
-    os.makedirs(STORAGE, exist_ok=True)
+# Storage: use /tmp on serverless (read-only filesystem), local dir otherwise
+if os.getenv("VERCEL"):
+    STORAGE = "/tmp/storage"
+else:
+    STORAGE = os.path.join(os.path.dirname(__file__), "..", "storage")
 
-app.mount("/storage", StaticFiles(directory=STORAGE), name="storage")
+try:
+    os.makedirs(STORAGE, exist_ok=True)
+    app.mount("/storage", StaticFiles(directory=STORAGE), name="storage")
+except OSError:
+    pass  # Gracefully skip if filesystem is restricted
