@@ -42,11 +42,21 @@ async def root():
 @app.get("/init-db")
 async def init_db():
     try:
-        from .db import create_db_and_tables
+        from app.db import create_db_and_tables
         await create_db_and_tables()
-        return {"status": "success", "message": "Database tables created successfully"}
+        return {"status": "success", "message": "Database initialized"}
     except Exception as e:
         return {"status": "error", "message": str(e)}
+
+@app.get("/seed-data")
+async def seed_data():
+    try:
+        from seed_demo_stages import seed_demo_data
+        await seed_demo_data()
+        return {"status": "success", "message": "Demo data seeded successfully"}
+    except Exception as e:
+        import traceback
+        return {"status": "error", "message": str(e), "traceback": traceback.format_exc()}
 
 # Storage: use /tmp on serverless (read-only filesystem), local dir otherwise
 if os.getenv("VERCEL"):
