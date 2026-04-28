@@ -32,6 +32,15 @@ app.add_middleware(
 )
 app.include_router(router)
 
+@app.get("/")
+async def root():
+    return {
+        "status": "online",
+        "service": "Quickship API",
+        "version": "1.0.0",
+        "docs": "/docs"
+    }
+
 # Storage: use /tmp on serverless (read-only filesystem), local dir otherwise
 if os.getenv("VERCEL"):
     STORAGE = "/tmp/storage"
