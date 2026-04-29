@@ -115,7 +115,7 @@ async def create_shipment(
     c.setFont("Helvetica-Bold", 24)
     c.drawString(50, 750, "Quickship Direct Shipping Label")
     
-    logo_path = os.path.join(os.path.dirname(__file__), "../../tracking-frontend/public/images/logo.png")
+    logo_path = os.path.join(os.path.dirname(__file__), "static/logo.png")
     if os.path.exists(logo_path):
         c.drawImage(logo_path, 400, 720, width=80, height=80, preserveAspectRatio=True, mask='auto')
         

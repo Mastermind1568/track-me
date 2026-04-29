@@ -8,7 +8,7 @@
     <a href="/about" class="hover:opacity-50 transition-opacity">About</a>
     <a href="/reviews" class="hover:opacity-50 transition-opacity">Reviews</a>
     <a href="/contact" class="hover:opacity-50 transition-opacity">Contact</a>
-    <a href="/merchant" class="bg-[#FFD600] border-2 border-black text-black px-5 py-2 hover:bg-black hover:text-[#FFD600] transition-all font-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1">Merchant Log In</a>
+    <a href={import.meta.env.PUBLIC_MERCHANT_URL || "/merchant"} class="bg-[#FFD600] border-2 border-black text-black px-5 py-2 hover:bg-black hover:text-[#FFD600] transition-all font-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-1 hover:translate-y-1">Merchant Log In</a>
   </div>
   <!-- Mobile hamburger -->
   <button id="mobile-menu-btn" class="md:hidden flex flex-col gap-1.5 p-2" aria-label="Open menu">
@@ -25,7 +25,7 @@
   <a href="/about" class="text-2xl font-black uppercase tracking-tighter hover:text-[#FFD600] transition-colors">About</a>
   <a href="/reviews" class="text-2xl font-black uppercase tracking-tighter hover:text-[#FFD600] transition-colors">Reviews</a>
   <a href="/contact" class="text-2xl font-black uppercase tracking-tighter hover:text-[#FFD600] transition-colors">Contact</a>
-  <a href="/merchant" class="bg-[#FFD600] text-black px-8 py-4 font-black uppercase tracking-widest text-sm mt-4">Merchant Log In</a>
+  <a href={import.meta.env.PUBLIC_MERCHANT_URL || "/merchant"} class="bg-[#FFD600] text-black px-8 py-4 font-black uppercase tracking-widest text-sm mt-4">Merchant Log In</a>
 </div>
 
 <script is:inline>
