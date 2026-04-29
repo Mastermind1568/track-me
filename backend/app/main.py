@@ -58,14 +58,10 @@ async def seed_data():
         import traceback
         return {"status": "error", "message": str(e), "traceback": traceback.format_exc()}
 
-# Storage: use /tmp on serverless (read-only filesystem), local dir otherwise
-if os.getenv("VERCEL"):
-    STORAGE = "/tmp/storage"
-else:
-    STORAGE = os.path.join(os.path.dirname(__file__), "..", "storage")
+from .storage import STORAGE_DIR
 
 try:
-    os.makedirs(STORAGE, exist_ok=True)
-    app.mount("/storage", StaticFiles(directory=STORAGE), name="storage")
+    os.makedirs(STORAGE_DIR, exist_ok=True)
+    app.mount("/storage", StaticFiles(directory=STORAGE_DIR), name="storage")
 except OSError:
     pass  # Gracefully skip if filesystem is restricted

@@ -53,7 +53,7 @@ DEMO_SHIPMENTS = [
     },
 ]
 
-async def run():
+async def seed_demo_data():
     engine = create_async_engine(get_async_database_url())
     async with AsyncSession(engine) as session:
         result = await session.execute(select(Merchant))
@@ -116,4 +116,4 @@ async def run():
             print(f"  http://localhost:4321/track/{d['tracking_no']}")
 
 if __name__ == "__main__":
-    asyncio.run(run())
+    asyncio.run(seed_demo_data())

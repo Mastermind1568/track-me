@@ -24,7 +24,7 @@ services:
     container_name: qs-api-prod
     restart: always
     environment:
-      DATABASE_URL: postgresql+asyncpg://parcel:parcel_production_secret@postgres:5432/quickship
+      DATABASE_URL: postgresql://parcel:parcel_production_secret@postgres:5432/quickship
       ADMIN_SECRET_KEY: ${ADMIN_SECRET_KEY:-change_me_in_production}
     depends_on:
       postgres:

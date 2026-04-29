@@ -1,7 +1,11 @@
 import os
 from uuid import uuid4
 
-STORAGE_DIR = os.path.join(os.path.dirname(__file__), "..", "storage")
+if os.getenv("VERCEL"):
+    STORAGE_DIR = "/tmp/storage"
+else:
+    STORAGE_DIR = os.path.join(os.path.dirname(__file__), "..", "storage")
+
 os.makedirs(STORAGE_DIR, exist_ok=True)
 
 

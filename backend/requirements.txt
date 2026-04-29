@@ -3,3 +3,6 @@ sqlmodel
 asyncpg
 aiosqlite
 python-multipart
+reportlab
+httpx
+uvicorn
